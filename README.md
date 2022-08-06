@@ -1,3 +1,6 @@
+<img width="400" alt="Screen Shot 2022-08-06 at 4 06 43 PM" src="https://user-images.githubusercontent.com/92605110/183268598-571bf202-63e0-4fdd-848e-8530f32e77aa.png">
+
+
 # GreenView 
   
      A feature that helps SnapChat users participate in community engagements through events 
@@ -41,6 +44,8 @@
      
 # Team Members
       
+  <img width="400" src="https://user-images.githubusercontent.com/92605110/183268542-ebe22a46-59df-491f-a8e7-f7f500ff2236.png">
+
        Storytelling
         
            Carlos Hernandez
