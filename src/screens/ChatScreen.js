@@ -4,35 +4,30 @@ import React, {
     useEffect,
     useLayoutEffect,
 } from "react";
-import { GiftedChat, InputToolbar } from "react-native-gifted-chat";
-import { View, StyleSheet, TouchableOpacity, Text, Image} from "react-native";
+import { GiftedChat, InputToolbar, Send, Bubble } from "react-native-gifted-chat";
+import { View, StyleSheet, TouchableOpacity, Text, Image, ScrollView} from "react-native";
 import db from "../../firebase";
 import { updateDoc, arrayUnion, doc, onSnapshot } from "firebase/firestore";
 import { useAuthentication } from "../utils/hooks/useAuthentication";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { async } from "@firebase/util";
 //import firebase from "firebase/app";
 import MapTopIcon from "../components/MapTopIcon";
+import { render } from "react-dom";
 export default function ChatScreen({ route, navigation }) {
     const [messages, setMessages] = useState([]);
     const { user, userData } = useAuthentication();
-    const [isLoading, setIsLoading] = useState(true);
-    //   const routeParams = route.params;
-    //  console.log('navigation: ', routeParams)
-
-    //console.log('just route edit: ', route.params.paramKey)
-    //console.log('route edit: ', routeParams)
-
-    console.log("Park Name", route.params.paramKey.toString());
-    // let name = route.params.paramKey.toString()
+    console.log("Chatscreen route => ", route);
     useEffect(() => {
         let unsubscribeFromNewSnapshots = onSnapshot(
             doc(db, "chats", route.params.paramKey.toString()),
             (snapshot) => {
-                console.log(user, "New Snapshot! ", snapshot.data().messages);
-                setMessages(snapshot.data().messages);
-                setIsLoading(false);
-            }
-        );
+              let updatedMessage = snapshot.data().messages.map((message) => {
+                message.createdAt = message.createdAt.seconds * 1000;
+                return message;
+              });
+              setMessages(updatedMessage);
+            });
 
         return function cleanupBeforeUnmounting() {
             unsubscribeFromNewSnapshots();
@@ -51,14 +46,40 @@ export default function ChatScreen({ route, navigation }) {
         [route]
     );
 
-    const renderActions = () => {
-      return (<View style={{ flexDirection: 'row', paddingBottom: 0 }}>
-        <TouchableOpacity>
-          <Image source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/left-arroww.png")} style={{ width: 24, height: 24 }} />
-        </TouchableOpacity>
-      </View>);
-    };
-
+    const renderSend = (props) => {
+      return (
+          <Send {...props}>
+              <View>
+                  <MaterialCommunityIcons
+                      name="send-circle"
+                      style={{ marginBottom: 5, marginRight: 5 }}
+                      size={32}
+                      color="green"
+                  />
+              </View>
+          </Send>
+      );
+  };
+  const renderBubble = (props) => {
+      return (
+          <Bubble
+              {...props}
+              wrapperStyle={{
+                  right: {
+                      backgroundColor: '#009900',
+                  },
+                  left: {
+                      backgroundColor: '#CCFFCC',
+                  },
+              }}
+              textStyle={{
+                  right: {
+                      color: '#fff',
+                  },
+              }}
+          />
+      );
+  };
     // //const [userId, setUserID] = useState([]);
     if (user == null || userData == null) {
         return (
@@ -67,24 +88,25 @@ export default function ChatScreen({ route, navigation }) {
             </View>
         );
     }
-    // console.log("UserData", userData);
+    
     return (
-      <View style={{ backgroundColor: '#fff', flex: 1, marginBottom: -35 }}>
           <GiftedChat
-            scrollToBottom
                     messages={messages}
                     onSend={(messages) => onSend(messages)}
                     user={{
                         // current "blue bubble" user
                         _id: userData._id,
                         name: userData.name,
+                        avatar: userData.avatar,
                     }}
                     inverted={false}
                     showUserAvatar={true}
                     renderUsernameOnMessage={true}
-                    renderActions={renderActions}
+                    alwaysShowSend
+                    bottomOffset={110}
+                    renderBubble = {renderBubble}
+                    renderSend = {renderSend}
                 />
-      </View>
     );
 }
 const styles = StyleSheet.create({
