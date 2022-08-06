@@ -1,4 +1,4 @@
-# GreenView
+# GreenView 
   
      A feature that helps SnapChat users participate in community engagements through events 
      and community chat to protect their environment.
@@ -22,6 +22,13 @@
 # Application
 
 <img src = "https://user-images.githubusercontent.com/92605110/183267200-201242a4-7ecf-4a92-8df5-449a30d9bf61.gif" width="270" height="400" />
+
+# Technologies Used
+  
+    • React Native
+    • Firebase Auth
+    • Firebase Firestore
+    • JavaScript
 
 # To Run The App
 
