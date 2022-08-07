@@ -32,6 +32,7 @@
   - React Native
   - React Native Maps
   - Google Map API
+  - React Native GiftedChat
 - Back-End
   - Firebase
   - Authentication
