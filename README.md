@@ -1,6 +1,6 @@
 <img width="400" alt="Screen Shot 2022-08-06 at 4 06 43 PM" src="https://user-images.githubusercontent.com/92605110/183268598-571bf202-63e0-4fdd-848e-8530f32e77aa.png">
 
-# Green View
+# GreenView
 <table>
 <tr>
 <td>
