@@ -64,6 +64,7 @@
 
 | Name / Role | LinkedIn |
 | ----------- | ----------- |
+| Anthony Chidoro  / Lead Product Manager | [LinkedIn](https://www.linkedin.com/in/anthonychidoro/) |
 | Amanuel Reda / Engineering | [LinkedIn](https://www.linkedin.com/in/amanuel-reda/) |
 | Elias Woldie / Engineering | [LinkedIn](https://www.linkedin.com/in/elias-woldie-197b18132/) |
 | Carlos Hernandez/ Product Management | [LinkedIn](https://www.linkedin.com/in/carlos-hernandez-193311236/) |
